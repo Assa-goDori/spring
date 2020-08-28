@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /src/main/java/annotation.xml -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd">
+      <!-- chap2 패키지의 클래스 중 @Component 어노테이션을 가진 클래스를 객체화 시킴. -->
+      <context:component-scan base-package="chap2" />
+      <context:annotation-config /> <!-- Autowired 설정부분. 2.5이상 version부터 생략 가능 -->
+      <!-- <bean id="camera1" class="chap2.Camera">
+      	<property name="number" value="1" />
+      </bean> -->
+      <!-- xml의 namespace p 설정 -->
+      <bean id="camera1" class="chap2.Camera" p:number="1" />
+      <bean id="camera2" class="chap2.Camera" p:number="2" />
+      <bean id="camera3" class="chap2.Camera" p:number="3" />
+      <bean id="camera4" class="chap2.Camera" p:number="4" />
+      <bean id="windowSensor" class="chap2.InfraredRaySensor">
+      	<constructor-arg value="창센서" />	<!-- constructor : 생성자에 값 추가 -->
+      	<qualifier value="intrusionDetection" />
+      </bean>
+      <bean id="doorSensor" class="chap2.InfraredRaySensor">
+      	<constructor-arg value="현관센서" />
+      	<qualifier value="intrusionDetection" />
+      </bean>
+      <bean id="lampSensor" class="chap2.InfraredRaySensor">
+      	<constructor-arg value="전등센서" />
+      	<qualifier value="intrusionDetection" />
+      </bean>
+      <bean id="displayMode" class="chap2.DisplayMode" p:type="GRID" />
+</beans>
