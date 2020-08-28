@@ -1,0 +1,17 @@
+ArticleCacheAdvice.cache()
+LoggingAdvice.before()
+ReadArticleService.getArticleAndReadCnt(1)
+LoggingAdvice.afterReturning()
+LoggingAdvice.afterFinally()
+ArticleCacheAdvice.cache()
+
+ArticleCacheAdvice.cache()
+ReadArticleService.getArticleAndReadCnt(1) -> 실행안됨
+
+ArticleCacheAdvice.cache()
+LoggingAdvice.before()
+ReadArticleService.getArticleAndReadCnt(0)
+LoggingAdvice.afterThrowing()
+LoggingAdvice.afterFinally()
+[예외 발생, ArticleCacheAdvice.cache() 실행 중단하고 메인으로 넘어감]
+Main2.main() catch구문 실행
