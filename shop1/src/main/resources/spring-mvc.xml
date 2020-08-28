@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- /src/main/resources/spring-mvc.xml
+	url : http://localhost:8080/shop1/index.shop
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:p="http://www.springframework.org/schema/p"
+      xmlns:context="http://www.springframework.org/schema/context"
+      xmlns:aop="http://www.springframework.org/schema/aop"
+      xsi:schemaLocation="http://www.springframework.org/schema/beans
+      http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/context
+      http://www.springframework.org/schema/context/spring-context.xsd
+      http://www.springframework.org/schema/aop
+      http://www.springframework.org/schema/aop/spring-aop.xsd">
+      <!-- handlerMapping : 요청 url과 controller를 연결 -->
+      <bean id="handlerMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+      	<property name="mappings">
+      		<value>
+      			/index.shop=indexController
+      			/detail.shop=detailController
+      		</value>
+      	</property>
+      </bean>
+      <bean id="indexController" class="controller.IndexController" p:shopService-ref="shopService" />
+      <bean id="detailController" class="controller.DetailController" p:shopService-ref="shopService" />
+      <bean id="shopService" class="logic.ShopService" p:itemDao-ref="itemDao" />
+      <bean id="itemDao" class="dao.ItemDao" p:dataSource-ref="dataSource" />
+      <!-- viewResolover : 뷰선택자. index라는 이름의 view를 받음. prefix와 suffix를 통해 /WEB-INF/view/index.jsp가 지정한 view임을 지정 -->
+      <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      	<property name="viewClass">
+      		<value>org.springframework.web.servlet.view.JstlView</value>
+      	</property>
+      	<property name="prefix">
+	      	<value>/WEB-INF/view/</value>
+    	  </property>
+      	<property	name="suffix">
+      		<value>.jsp</value>
+      	</property>
+      </bean>
+</beans>
